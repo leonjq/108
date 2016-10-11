@@ -1,0 +1,8 @@
+from app.views import UploadFile
+from app.views import DownloadFile
+from app.views import Homepage
+
+
+url(r'^upload/$', UploadFile.as_view()),
+url(r'^files/(?P<pk>[0-9]+)/.*$', DownloadFile.as_view()),
+url(r'^$', Homepage.as_view()),
