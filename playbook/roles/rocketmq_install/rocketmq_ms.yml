@@ -15,7 +15,42 @@
   hosts: bm1b
   raw: cp {{ rocketmq_name_init.d_path }} {{ rocketmq_init.d_path }}
 
-- name: copy broker bm1a's config file to path
+- name: copy broker bm1a's config file to path,if you want to deploy 2m/2s/async mode,change service's config file role, bm1a/bs1b/bm2a/bs2b. 
   hosts: bm1a
-  raw: sed -i '4s/brokerIP1=172.16.2.82/brokerIP1=172.16.3.91/g' {{ rockermq_broker_m1a_src_path }}
-  raw: sed -i '10s/namesrvAddr=172.16.2.81:9876/namesrvAddr=172.16.2.81:9876/g' {{ rockermq_broker_m1a_src_path }}
+  raw: ip=$(ping bm1a -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '4s/brokerIP1=<localhost_IP>/brokerIP1='$ip'/g' {{ rockermq_broker_bm1a_src_path }}
+  raw: ip=$(ping name -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '10s/namesrvAddr=<nameserver_ip1>:9876;<nameserver_ip2>:9876/namesrvAddr='$ip':9876/g' {{ rockermq_broker_bm1a_src_path }}
+
+- name: copy broker bs1b's config file to path,if you want to deploy 2m/2s/async mode,change service's config file role, bm1a/bs1b/bm2a/bs2b.
+  hosts: bs1b
+  raw: ip=$(ping bs1a -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '4s/brokerIP1=<localhost_IP>/brokerIP1='$ip'/g' {{ rockermq_broker_bs1b_src_path }}
+  raw: ip=$(ping name -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '10s/namesrvAddr=<nameserver_ip1>:9876;<nameserver_ip2>:9876/namesrvAddr='$ip':9876/g' {{ rockermq_broker_bs1b_src_path }}
+
+- name: copy broker bm2a's config file to path,if you want to deploy 2m/2s/async mode,change service's config file role, bm1a/bs1b/bm2a/bs2b.
+  hosts: bm2a
+  raw: ip=$(ping bm2a -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '4s/brokerIP1=<localhost_IP>/brokerIP1='$ip'/g' {{ rockermq_broker_bm1a_src_path }}
+  raw: ip=$(ping name -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '10s/namesrvAddr=<nameserver_ip1>:9876;<nameserver_ip2>:9876/namesrvAddr='$ip':9876/g' {{ rockermq_broker_bm1a_src_path }}
+
+- name: copy broker bs2b's config file to path,if you want to deploy 2m/2s/async mode,change service's config file role, bm1a/bs1b/bm2a/bs2b.
+  hosts: bs2b
+  raw: ip=$(ping bs2b -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '4s/brokerIP1=<localhost_IP>/brokerIP1='$ip'/g' {{ rockermq_broker_bs1b_src_path }}
+  raw: ip=$(ping name -c 1 | sed '1{s/[^(]*(//;s/).*//;q}') && sed -i '10s/namesrvAddr=<nameserver_ip1>:9876;<nameserver_ip2>:9876/namesrvAddr='$ip':9876/g' {{ rockermq_broker_bs1b_src_path }}
+
+- name: copy broker bm1a's init.d file to /etc/init.d, and remove role's comment
+  hosts: bm1a
+  raw: cp {{ rockermq_broker_init.d_src_path }} {{ rocketmq_init.d_path }}/rocketmq
+  raw: sed -i '12s:#::g' /etc/init.d/rocketmq
+
+- name: copy broker bm1b's init.d file to /etc/init.d, and remove role's comment
+  hosts: bm1b
+  raw: cp {{ rockermq_broker_init.d_src_path }} {{ rocketmq_init.d_path }}/rocketmq
+  raw: sed -i '13s:#::g' /etc/init.d/rocketmq
+
+- name: copy broker bm2a's init.d file to /etc/init.d, and remove role's comment
+  hosts: bm2a
+  raw: cp {{ rockermq_broker_init.d_src_path }} {{ rocketmq_init.d_path }}/rocketmq
+  raw: sed -i '14s:#::g' /etc/init.d/rocketmq
+
+- name: copy broker bm1b's init.d file to /etc/init.d, and remove role's comment
+  hosts: bm2b
+  raw: cp {{ rockermq_broker_init.d_src_path }} {{ rocketmq_init.d_path }}/rocketmq
+  raw: sed -i '15s:#::g' /etc/init.d/rocketmq
