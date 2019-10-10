@@ -1,0 +1,12 @@
+---
+- name: create a directory
+  file: name={{ java_dest_file_path }} state=directory mode=0755 recurse=yes
+
+- name: To copy java binary package to destination server and path
+  copy: src={{ java_src_file_path }} dest={{ java_dest_file_path }}
+
+- name: unarchive java package
+  unarchive: src={{ java_src_file_path }} dest={{ java_dest_file_path }} owner=root group=root
+
+- name: adjust java's setting
+  raw: mv {{ java_original_file_path }}/* {{ java_dest_file_path }} && chown -R root:root {{ java_dest_file_path }}

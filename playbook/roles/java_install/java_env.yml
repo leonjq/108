@@ -1,0 +1,9 @@
+---
+- name: To add java's setting in system and testing
+  raw: bash {{ java_profile_file_path }}
+
+- name: sync profile to all server
+  copy: src={{ java_profile_file_path }} {{ java_profile_dest_file_path }}
+
+- name: test java's env
+  raw: source {{ java_profile_file_path }} && java -version && echo "java's setting DONE!!!"

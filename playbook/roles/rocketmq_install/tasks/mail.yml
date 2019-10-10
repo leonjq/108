@@ -1,0 +1,7 @@
+---
+- include: rocketmq_setting.yml
+- include: rocketmq_copy.yml
+- include: rocketmq_path.yml
+- include: rocketmq_name.yml
+- include: rocketmq_ms.yml
+---

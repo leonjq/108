@@ -1,0 +1,6 @@
+java_src_file_path: /root/playbook/roles/java_install/templates/jdk-8u112-linux-x64.tar.gz
+java_dest_file_path: /opt/java
+java_src_env_file_path: /etc/profile
+java_dest_env_file_path: /etc/profile
+java_original_file_path: /opt/java/jdk1.8.0_112
+java_profile_file_path: /etc/profile

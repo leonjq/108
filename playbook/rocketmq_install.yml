@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: root
+  gather_facts: True
+
+  roles: 
+    - java_install
+
+- hosts: ms:name
+  remote_user: root
+  gather_facts: True
+
+  roles:
+    - rocketmq_install

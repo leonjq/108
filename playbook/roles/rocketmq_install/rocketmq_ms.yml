@@ -1,0 +1,21 @@
+---
+- name: change broker bm1a's init.d config file
+  hosts: bm1a
+  raw: sed -i '10s:#::/g' {{ rocketmq_name_init.d_path }}
+
+- name: copy this changed init.d file to system init.d path
+  hosts: bm1a
+  raw: cp {{ rocketmq_name_init.d_path }} {{ rocketmq_init.d_path }}
+
+- name: change broker bm1b's init.d config file
+  hosts: bm1b
+  raw: sed -i '11s:#::/g' {{ rocketmq_name_init.d_path }}
+
+- name: copy this changed init.d file to system init.d path
+  hosts: bm1b
+  raw: cp {{ rocketmq_name_init.d_path }} {{ rocketmq_init.d_path }}
+
+- name: copy broker bm1a's config file to path
+  hosts: bm1a
+  raw: sed -i '4s/brokerIP1=172.16.2.82/brokerIP1=172.16.3.91/g' {{ rockermq_broker_m1a_src_path }}
+  raw: sed -i '10s/namesrvAddr=172.16.2.81:9876/namesrvAddr=172.16.2.81:9876/g' {{ rockermq_broker_m1a_src_path }}

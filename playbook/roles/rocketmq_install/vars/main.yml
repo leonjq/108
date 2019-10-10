@@ -1,0 +1,17 @@
+rocketmq_src_file_path: /root/playbook/roles/rocketmq_install/templates/rocketmq-all-4.3.2-bin-release.zip
+rocketmq_dest_file_path: /opt/rocketmq
+rocketmq_init.d_path: /etc/init.d/
+rocketmq_name_bin_path: /opt/rocketmq/bin/
+rocketmq_broker_configfile_path: /opt/rocketmq/
+rocketmq_unzip_file_path: /opt/rocketmq/rocketmq-all-4.3.2-bin-release
+rocketmq_name_jvm_src_path: /root/playbook/roles/rocketmq_install/templates/name_server/nameserver.jvm.sh
+rocketmq_name_init.d_path: /root/playbook/roles/rocketmq_install/templates/name_server/nameserver.init.d.sh
+rocketmq_name_dest_path: /root/rocketmq/name_server/
+rockermq_broker_jvm_src_path: /root/playbook/roles/rocketmq_install/templates/broker/broker.jvm.sh
+rockermq_broker_init.d_src_path: /root/playbook/roles/rocketmq_install/templates/broker/broker.init.d.sh
+rockermq_broker_m1a_src_path: /root/playbook/roles/rocketmq_install/templates/broker/broker-a.properties
+rockermq_broker_s1b_src_path: /root/playbook/roles/rocketmq_install/templates/broker/broker-a-s.properties
+rockermq_broker_m2b_src_path: /root/playbook/roles/rocketmq_install/templates/broker/broker-b.properties
+rockermq_broker_s2b_src_path: /root/playbook/roles/rocketmq_install/templates/broker/broker-b-s.properties
+rockermq_broker_dest_path: /root/rocketmq/broker/
+

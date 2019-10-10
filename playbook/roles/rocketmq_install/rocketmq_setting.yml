@@ -1,0 +1,19 @@
+---
+- name: add rocketmq user
+  raw: useradd -m rocketmq
+
+- name: create new config directory for broker master m1a
+  hosts: bm1a
+  raw: sudo su - rocketmq && sudo su - rocketmq && cd /opt/rocketmq && mkdir -p store/broker-a/commitlog && mkdir -p store/broker-a/consumequeue && mkdir -p store/broker-a/index && mkdir -p store/checkpoint && mkdir -p store/abort && exit
+
+- name: create new config directory for broker slave s1b
+  hosts: bs1b
+  raw: sudo su - rocketmq && cd /opt/rocketmq && mkdir -p store/broker-a-s/commitlog && mkdir -p store/broker-a-s/consumequeue && mkdir -p store/broker-a-s/index && mkdir -p store/checkpoint && mkdir -p store/abort && exit
+
+- name: create new config directory for broker master m2a
+  hosts: bm2a
+  raw: sudo su - rocketmq && sudo su - rocketmq && cd /opt/rocketmq && mkdir -p store/broker-a/commitlog && mkdir -p store/broker-a/consumequeue && mkdir -p store/broker-a/index && mkdir -p store/checkpoint && mkdir -p store/abort && exit
+
+- name: create new config directory for broker slave s2b
+  hosts: bs2b
+  raw: sudo su - rocketmq && cd /opt/rocketmq && mkdir -p store/broker-a-s/commitlog && mkdir -p store/broker-a-s/consumequeue && mkdir -p store/broker-a-s/index && mkdir -p store/checkpoint && mkdir -p store/abort && exit

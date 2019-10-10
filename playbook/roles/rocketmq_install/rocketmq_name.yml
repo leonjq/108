@@ -1,0 +1,10 @@
+---
+- name: config name server jvm env
+  raw: ssh -Tq root@name 'bash /root/rocketmq/name_server/nameserver.jvm.sh'
+
+- name: create init.d file for service
+  copy: src={{ rocketmq_name_init.d_path }} dest={{ rocketmq_name_dest_path }}
+
+- name: start name service
+  raw: ssh -Tq root@name 'systemctl daemon-reload && service rocketmq start'
+---

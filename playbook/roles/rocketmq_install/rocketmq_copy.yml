@@ -1,0 +1,10 @@
+---
+- name: copy rocketmq package to server
+  copy: src={{ rocketmq_src_file_path }} dest={{ rocketmq_dest_file_path }}
+
+- name: unzip rocketmq package
+  raw: unzip {{ rocketmq_src_file_path }} -d {{ rocketmq_dest_file_path }}
+
+- name: arrange rocketmq unzip file
+  raw: mv {{ rocketmq_unzip_file_path }}/* {{ rocketmq_dest_file_path }} && chown -R rocketmq:rocketmq {{ rocketmq_dest_file_path }}
+---

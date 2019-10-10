@@ -1,0 +1,24 @@
+---
+- name: create directory in name and broker's server
+  file: path={{ rockermq_broker_dest_path }} state=directory
+
+- name: copy name server binary file
+  hosts: name
+  copy: src={{ rocketmq_name_jvm_src_path }} dest={{ rocketmq_name_dest_path }}
+
+- name: copy broker master m1a/m2b's init.d
+  hosts: bm
+  copy: src={{ rockermq_broker_init.d_src_path }} dest={{ rockermq_broker_dest_path }}
+
+- name: copy broker master m1a/m2b's jvm script
+  hosts: bm
+  copy: src={{ rockermq_broker_jvm_src_path }} dest={{ rockermq_broker_dest_path }}
+
+- name: copy broker master config file
+  hosts: bm
+  copy: src={{ rockermq_broker_m1a_src_path }} dest={{ rockermq_broker_dest_path }}
+
+- name: copy broker slave s1a/s2b's init.d
+  hosts: bs
+  copy: src={{ rockermq_broker_s1b_src_path }} dest={{ rockermq_broker_dest_path }}
+
